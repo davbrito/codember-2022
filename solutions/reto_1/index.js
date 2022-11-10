@@ -29,16 +29,17 @@ function isValid(user) {
 export async function getSolution() {
   const data = await getInputData()
   
-  const { invalidCount, lastInvalidUser } = parse(data)
+  const { validCount, lastValidUser } = parse(data)
     .reduce((acc, user) => {
-      if (!isValid(user)) {
-        acc.invalidCount++;
-        acc.lastInvalidUser = user.usr
-
+      if (isValid(user)) {
+        acc.validCount++;
+        acc.lastValidUser = user.usr
       }
-    }, { invalidCount: 0, lastInvalidUser: '' })
 
-  return `${invalidCount}@${lastInvalidUser}`
+      return acc
+    }, { validCount: 0, lastValidUser: '' })
+
+  return `${validCount}${lastValidUser}`
 }
 
 
