@@ -42,7 +42,7 @@ export async function getSolution() {
 }
 
 
-function getInputData() {
+async function getInputData() {
   const response = await fetch(new URL('./users.txt', import.meta.url).href)
   return response.text()
 }
